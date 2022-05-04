@@ -45,12 +45,12 @@ public class Code {
         mac.update("大家好！！".getBytes(StandardCharsets.UTF_8));
         byte[] result = mac.doFinal();
         System.out.println(new BigInteger(1,result).toString(16));
-//        对称加密
+//        AES对称加密,SecretKey长度要求16byte，ENCRYPT_MODE：编码，DECRYPT_MODE：解码
         Cipher cipher=Cipher.getInstance("AES/ECB/PKCS5Padding");
         SecretKey secretKey2=new SecretKeySpec("1231231231231231".getBytes(StandardCharsets.UTF_8),"AES");
         cipher.init(Cipher.ENCRYPT_MODE,secretKey2);
         byte[] bytes = cipher.doFinal("大家好！！！".getBytes(StandardCharsets.UTF_8));
-        System.out.println( Base64.getEncoder().encodeToString(bytes));
+        System.out.println(Base64.getEncoder().encodeToString(bytes));
         cipher.init(Cipher.DECRYPT_MODE,secretKey2);
         byte[] bytes1 = cipher.doFinal(bytes);
         String s=new String(bytes1, StandardCharsets.UTF_8);

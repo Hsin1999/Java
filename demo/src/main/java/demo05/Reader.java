@@ -25,6 +25,6 @@ public class Reader {
         Files.write(Paths.get("readme.txt"), Collections.singleton("你好"),StandardCharsets.UTF_8);
         List<String> strings = Files.readAllLines(Paths.get("readme.txt"));
         System.out.println(strings);
-        Files.write(Paths.get("readme.txt"),"你好呀".getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+        Files.write(Paths.get("readme.txt"),"追加输出下".getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
     }
 }
