@@ -1,7 +1,6 @@
 package demo09;
 
 import java.util.Objects;
-
 public class Person {
     String name;
     String age;
@@ -19,8 +18,24 @@ public class Person {
         return name.equals(person.name) && age.equals(person.age);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, age);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }

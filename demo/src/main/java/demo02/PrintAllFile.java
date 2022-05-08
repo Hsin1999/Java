@@ -4,7 +4,7 @@ import java.io.File;
 /**
  * 遍历打印指定目录下的所有文件及文件夹自文件
  */
-public class PrintAllFile {
+public class PrintAllFile implements Runnable{
     private final File filepath;
     public PrintAllFile(String filepath){
         this.filepath=new File(filepath);
@@ -12,7 +12,7 @@ public class PrintAllFile {
     /**
      * 打印方法
      */
-    public void print(){
+    public void run(){
         System.out.println(filepath.toPath().getFileName()+"/");
         click(filepath,1);
     }
