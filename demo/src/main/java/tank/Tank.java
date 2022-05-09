@@ -1,9 +1,18 @@
 package tank;
 
+import java.util.Vector;
+
 public class Tank {
     private int x;
     private int y;
     private int direct=0;
+    private int type;
+    Shot shot=null;
+    Vector<Shot> shots=new Vector<>();
+
+    public int getType() {
+        return type;
+    }
 
     public int getDirect() {
         return direct;

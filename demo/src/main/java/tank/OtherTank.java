@@ -3,15 +3,9 @@ package tank;
 import java.util.Vector;
 
 public class OtherTank extends Tank{
-    private int type=1;
-    Vector<Shot> shots=new Vector<>();
-
+    private final int type=1;
     public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
+        return this.type;
     }
 
     public OtherTank(int x,int y) {
