@@ -19,9 +19,10 @@ public class TankPanel extends JPanel implements KeyListener,Runnable {//KeyList
         Tanks.add(hero);
         int i=3;
         for (int j = 0; j < i; j++) {
-            OtherTank otherTank = new OtherTank(100 * (j + 1), 100);
+            OtherTank otherTank = new OtherTank(100 * (j + 2), 200);
             Tanks.add(otherTank);
             new Thread(new OtherTankShot(otherTank)).start();
+            new Thread(new TankMove(otherTank)).start();
         }
     }
     @Override

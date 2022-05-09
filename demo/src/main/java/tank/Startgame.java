@@ -14,5 +14,7 @@ public class Startgame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         new Thread(mp).start();
+
+
     }
 }

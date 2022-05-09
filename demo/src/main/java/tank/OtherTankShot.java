@@ -15,10 +15,12 @@ public class OtherTankShot implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-                Shot shot = new Shot(otherTank.getX(), otherTank.getY(), otherTank.getDirect(),otherTank.getType());
+                Shot shot = new Shot(otherTank.getX(), otherTank.getY(), otherTank.getDirect(), otherTank.getType());
+
                 otherTank.shots.add(shot);
                 if (TankPanel.Tanks.contains(otherTank)){
                     new Thread(shot).start();}
-        }
+            }
+
     }
 }
