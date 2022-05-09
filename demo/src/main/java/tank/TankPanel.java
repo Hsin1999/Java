@@ -14,8 +14,10 @@ public class TankPanel extends JPanel implements KeyListener,Runnable {//KeyList
     static Graphics g;
     public static boolean loop=true;
     public static Vector<Tank> Tanks=new Vector<>();//所有坦克
+
+
     public TankPanel(){
-        this.hero=new HERO(800,100);
+        hero=new HERO(800,100);
         Tanks.add(hero);
         int i=3;
         for (int j = 0; j < i; j++) {
@@ -30,11 +32,14 @@ public class TankPanel extends JPanel implements KeyListener,Runnable {//KeyList
         TankPanel.g =g;
         super.paint(g);
         if (!loop){
+            g.setColor(Color.red);
+            g.fillRect(0, 0, 1000, 800);
             g.setColor(Color.black);
-            g.fillRect(0, 0, 1000, 1000);
+            g.setFont(new Font("微软雅黑",Font.BOLD,36));
+            g.drawString("Game Over",390,390);
         }else {
             g.setColor(Color.black);
-            g.fillRect(0, 0, 1000, 1000);
+            g.fillRect(0, 0, 1000, 800);
             paintTAllTank();
             Tanksshot();
         }
@@ -43,7 +48,11 @@ public class TankPanel extends JPanel implements KeyListener,Runnable {//KeyList
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyChar()=='q'){
+            loop=false;
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
