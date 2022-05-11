@@ -21,7 +21,7 @@ public class TankPanel extends JPanel implements KeyListener,Runnable {//KeyList
         Tanks.add(hero);
         int i=5;//敌军坦克数量
         for (int j = 0; j < i; j++) {
-            OtherTank otherTank = new OtherTank(100 * (j + 2), 200);
+            OtherTank otherTank = new OtherTank(100 *j, 200);
             Tanks.add(otherTank);
             new Thread(new OtherTankShot(otherTank)).start();
             new Thread(new TankMove(otherTank)).start();

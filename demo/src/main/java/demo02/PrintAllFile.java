@@ -13,7 +13,7 @@ public class PrintAllFile implements Runnable{
      * 打印方法
      */
     public void run(){
-        System.out.println(filepath.toPath().getFileName()+"/");
+        System.out.println(filepath.getName()+"/");
         click(filepath,1);
     }
 

@@ -17,6 +17,7 @@ public class Replace {
         Matcher matcher=pattern.matcher(template);
         while (matcher.find()){
             matcher.appendReplacement(stringBuffer,map.get(matcher.group(1)));
+            System.out.println(matcher.group(1));
         }
         matcher.appendTail(stringBuffer);
         return stringBuffer.toString();
