@@ -2,6 +2,7 @@ package demo12;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 /**
  * @author: zhangzhongxin
@@ -23,20 +24,21 @@ public class Main {
         }
         ExecutorService executor= Executors.newFixedThreadPool(4);
         Task task=new Task();
-        for (int i = 0; i < 10; i++) {
-            executor.submit(task);
+        Future<Integer> future=executor.submit(task);
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
         executor.shutdown();
-        ScheduledExecutorService ses=Executors.newScheduledThreadPool(4);
-        ses.scheduleWithFixedDelay(task,2,1, TimeUnit.SECONDS);
-
     }
 }
-class Task implements Runnable{
+class Task implements Callable<Integer>{
     AtomicInteger atomicInteger=new AtomicInteger();
     @Override
-    public void run() {
-        System.out.println(atomicInteger.incrementAndGet());
-
+    public Integer call() throws Exception {
+        return atomicInteger.incrementAndGet();
     }
 }
