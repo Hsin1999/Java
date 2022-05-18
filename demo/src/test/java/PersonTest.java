@@ -36,6 +36,7 @@ public class PersonTest {
         Person zhangzhongxin = new Person("zhangzhongxin", "21");
         System.out.println(zhangzhongxin.equals(new Person("zhangzhongxin", "21")));
     }
+    @Disabled
     @Test
     void write() throws IOException {
         List<String> list=new ArrayList<>();
@@ -70,5 +71,11 @@ public class PersonTest {
 
         }
 
+    }
+    @Test
+    void t(){
+        File file =new File("./","copy1.png");
+        System.out.println(file.isFile());
+//        System.out.println(Arrays.toString(file.list()));
     }
 }

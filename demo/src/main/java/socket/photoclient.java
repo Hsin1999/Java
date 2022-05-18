@@ -27,6 +27,10 @@ public class photoclient {
         outputStream.write(bytes1);
         System.out.println("正在传输图片");
         socket.shutdownOutput();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        System.out.println(bufferedReader.readLine());
+        bufferedReader.close();
+        inputStream.close();
         outputStream.close();
         byteArrayOutputStream.close();
         socket.close();

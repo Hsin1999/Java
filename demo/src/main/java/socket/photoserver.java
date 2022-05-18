@@ -25,10 +25,13 @@ public class photoserver {
         OutputStream outputStream=new FileOutputStream("copy1.png");
         outputStream.write(bytes1);
         System.out.println("保存成功");
+        BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        writer.write("收到图片！！");
+        writer.newLine();
+        writer.close();
         outputStream.close();
         inputStream.close();
         byteArrayOutputStream.close();
-        socket.shutdownInput();
         socket.close();
     }
 
