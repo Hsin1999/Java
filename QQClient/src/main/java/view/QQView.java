@@ -1,5 +1,7 @@
 package view;
 
+import service.UserClientService;
+
 import java.util.Scanner;
 
 /**
@@ -9,8 +11,8 @@ import java.util.Scanner;
  */
 public class QQView {
     private boolean loop=true;
-    String key;
-
+    private String key;
+    private UserClientService userClientService=new UserClientService();
     public static void main(String[] args) {
         new QQView().mainMenu();
     }
@@ -28,7 +30,7 @@ public class QQView {
                     String userId=scanner.next();
                     System.out.print("请输密码：");
                     String password=scanner.next();
-                    if(true){
+                    if(userClientService.checkUser(userId,password)){
                         System.out.println("==========欢迎"+userId+"登录==========");
                         while (loop){
                             System.out.println("\n==========二级菜单（用户"+userId+"）==========");
@@ -41,6 +43,7 @@ public class QQView {
                             key=scanner.next();
                             switch (key){
                                 case "1":
+                                    userClientService.onlineFriendList();
                                     break;
                                 case "2":
                                     break;
