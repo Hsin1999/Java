@@ -1,5 +1,6 @@
 package view;
 
+import service.MessageClientService;
 import service.UserClientService;
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class QQView {
     private boolean loop = true;
     private String key;
     private UserClientService userClientService = new UserClientService();
-
+    private MessageClientService messageClientService=new MessageClientService();//用于用户聊天信息发送
     public static void main(String[] args) {
         new QQView().mainMenu();
     }
@@ -51,7 +52,10 @@ public class QQView {
                                     break;
                                 case "3":
                                     System.out.print("请输入要私聊的用户名称：");
-                                    userClientService.privateChat(scanner.next());
+                                    String getter = scanner.next();
+                                    System.out.println("请输入要发送的内容：");
+                                    String content=scanner.next();
+                                    messageClientService.sendMessageToOne(content,userId,getter);
                                     break;
                                 case "4":
                                     break;

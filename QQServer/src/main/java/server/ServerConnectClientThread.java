@@ -39,7 +39,7 @@ public class ServerConnectClientThread extends Thread{
                     this.socket.close();
                     System.out.println("用户"+message.getSender()+"已下机");
                     break;
-                }else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){
+                }else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){//转发用户私聊消息
                     ServerConnectClientThread clientThread = ManageClientThreads.getClientThread(message.getGetter());
                     if (clientThread!=null){
                         ObjectOutputStream outputStream = new ObjectOutputStream(clientThread.socket.getOutputStream());

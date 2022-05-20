@@ -35,8 +35,9 @@ public class ClientConnectServerThread extends Thread{
                         System.out.println("用户："+s[i]);
                     }
                 }
+                //接收来自用户的私聊消息
                 if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){
-                    System.out.println(message.getSender()+":"+message.getContent());
+                    System.out.println(message.getSendTime()+message.getSender()+"对我说："+message.getContent());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
