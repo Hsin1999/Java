@@ -1,7 +1,7 @@
 package server;
 
 import common.Message;
-import common.MessageTpye;
+import common.MessageType;
 import common.User;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class service {
                 User user = (User) objectInputStream.readObject();//读取客户端的User对象
                 Message message = new Message();//创建一个Message对象回复客户端
                 if (checkUser(user.getUserId(), user.getPassword())){//userId和password正确
-                    message.setMesType(MessageTpye.MESSAGE_LOGIN_SUCCEED);//设置登录状态为成功
+                    message.setMesType(MessageType.MESSAGE_LOGIN_SUCCEED);//设置登录状态为成功
                     ObjectOutputStream objectOnputStream = new ObjectOutputStream(socket.getOutputStream());
                     objectOnputStream.writeObject(message);//回复客户端Message
                     //创建一个线程，和客户端保持通讯
@@ -57,7 +57,7 @@ public class service {
                     serverConnectClientThread.start();//启动线程
                     ManageClientThreads.addClientThread(user.getUserId(), serverConnectClientThread);//将线程放入集合
                 }else{
-                    message.setMesType(MessageTpye.MESSAGE_LOGIN_FAIL);//设置登录状态为失败
+                    message.setMesType(MessageType.MESSAGE_LOGIN_FAIL);//设置登录状态为失败
                     ObjectOutputStream objectOnputStream = new ObjectOutputStream(socket.getOutputStream());
                     objectOnputStream.writeObject(message);//回复客户端Message
                     socket.close();
@@ -74,4 +74,5 @@ public class service {
             }
         }
     }
+
 }

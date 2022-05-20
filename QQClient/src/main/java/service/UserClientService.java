@@ -1,7 +1,7 @@
 package service;
 
 import common.Message;
-import common.MessageTpye;
+import common.MessageType;
 import common.User;
 
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * @author: zhangzhongxin
@@ -30,7 +31,7 @@ public class UserClientService {
 
             ObjectInputStream inputStream=new ObjectInputStream(socket.getInputStream());
             Message o = (Message) inputStream.readObject();
-            if(o.getMesType().equals(MessageTpye.MESSAGE_LOGIN_SUCCEED)){//如果登录成功
+            if(o.getMesType().equals(MessageType.MESSAGE_LOGIN_SUCCEED)){//如果登录成功
                 //创建线程
                 ClientConnectServerThread clientConnectServerThread = new ClientConnectServerThread(socket);
                 clientConnectServerThread.start();
@@ -49,7 +50,7 @@ public class UserClientService {
     public void onlineFriendList(){
         //发送一个Message
         Message message = new Message();
-        message.setMesType(MessageTpye.MESSAGE_GET_ONLINE_FRIEND);
+        message.setMesType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
         ObjectOutputStream outputStream = null;
         try {
             //通过线程管理获取当前用户的线程对象，通过线程对象获取绑定的socket，调用socket.getOutputStream方法获取输出流
@@ -58,8 +59,40 @@ public class UserClientService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+    }
+    public void logout(){//退出系统方法
+        //发送Message
+        Message message = new Message();
+        message.setMesType(MessageType.MESSAGE_CLIENT_EXIT);
+        message.setSender(u.getUserId());
+        try {
+            ObjectOutputStream outputStream =new ObjectOutputStream( ManageClientConncetServerThread.getClientConncetServerThread(u.getUserId()).getSocket().getOutputStream());
+            outputStream.writeObject(message);
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void privateChat(String userId){
+        Scanner scanner = new Scanner(System.in);
+        Message message = new Message();
+        message.setGetter(userId);
+        message.setSender(u.getUserId());
+        message.setMesType(MessageType.MESSAGE_COMM_MES);
+        try {
+            while (true){
+                String next = scanner.next();
+                if (next.equals("exit")){
+                    break;
+                }
+                message.setContent(next);
+                ObjectOutputStream outputStream =new ObjectOutputStream( ManageClientConncetServerThread.getClientConncetServerThread(u.getUserId()).getSocket().getOutputStream());
+                outputStream.writeObject(message);
+                System.out.println("我"+":"+next);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

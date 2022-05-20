@@ -1,12 +1,10 @@
 package server;
 
 import common.Message;
-import common.MessageTpye;
+import common.MessageType;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -27,15 +25,27 @@ public class ServerConnectClientThread extends Thread{
             try {
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                 Message message = (Message) objectInputStream.readObject();
-                if(message.getMesType().equals(MessageTpye.MESSAGE_GET_ONLINE_FRIEND)){
+                if(message.getMesType().equals(MessageType.MESSAGE_GET_ONLINE_FRIEND)){
                     String onlineUser = ManageClientThreads.getOnlineUser();
                     System.out.println(message.getSender()+"正在获取在线用户列表");
                     Message message1=new Message();
                     message1.setContent(onlineUser);
-                    message1.setMesType(MessageTpye.MESSAGE_RETURN_ONLINE_FRIEND);
+                    message1.setMesType(MessageType.MESSAGE_RETURN_ONLINE_FRIEND);
                     message1.setGetter(message.getSender());
                     ObjectOutputStream outputStream=new ObjectOutputStream(socket.getOutputStream());
                     outputStream.writeObject(message1);
+                }else if (message.getMesType().equals(MessageType.MESSAGE_CLIENT_EXIT)){
+                    ManageClientThreads.removeServerConnectClientThread(message.getSender());
+                    this.socket.close();
+                    System.out.println("用户"+message.getSender()+"已下机");
+                    break;
+                }else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){
+                    ServerConnectClientThread clientThread = ManageClientThreads.getClientThread(message.getGetter());
+                    if (clientThread!=null){
+                        ObjectOutputStream outputStream = new ObjectOutputStream(clientThread.socket.getOutputStream());
+                        outputStream.writeObject(message);
+                    }
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();

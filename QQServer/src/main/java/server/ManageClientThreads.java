@@ -25,6 +25,8 @@ public class ManageClientThreads {
             userList+=s+" ";
         }
         return userList;
-
-
-    }}
+    }
+    public static void removeServerConnectClientThread(String userId){
+        hashMap.remove(userId);
+    }
+}
