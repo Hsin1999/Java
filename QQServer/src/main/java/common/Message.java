@@ -14,7 +14,43 @@ public class Message implements Serializable {
     private String content;
     private String mesType;
     private String sendTime;
+    private byte[] filebytes;
+    private int filelen=0;
+    private String dest;
 
+    public byte[] getFilebytes() {
+        return filebytes;
+    }
+
+    public void setFilebytes(byte[] filebytes) {
+        this.filebytes = filebytes;
+    }
+
+    public int getFilelen() {
+        return filelen;
+    }
+
+    public void setFilelen(int filelen) {
+        this.filelen = filelen;
+    }
+
+    public String getDest() {
+        return dest;
+    }
+
+    public void setDest(String dest) {
+        this.dest = dest;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    private String src;
     public Message(String sender, String getter, String content, String mesType, String sendTime) {
         this.sender = sender;
         this.getter = getter;
@@ -22,7 +58,8 @@ public class Message implements Serializable {
         this.mesType = mesType;
         this.sendTime = sendTime;
     }
-    public Message() {}
+    public Message() {
+    }
 
     public String getSender() {
         return sender;

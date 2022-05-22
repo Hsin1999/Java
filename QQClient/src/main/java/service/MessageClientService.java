@@ -29,4 +29,20 @@ public class MessageClientService {
             e.printStackTrace();
         }
 
-    }}
+    }
+    public void sendMessageToAll(String content,String sender){
+        Message message = new Message();
+        message.setMesType(MessageType.MESSAGE_COMM_MES_ALL);
+        message.setSender(sender);
+        message.setContent(content);
+        message.setSendTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(ManageClientConncetServerThread.getClientConncetServerThread(sender).getSocket().getOutputStream());
+            outputStream.writeObject(message);
+            System.out.println(message.getSendTime()+sender+"对"+"大家"+"说："+message.getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}

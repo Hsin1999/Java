@@ -38,6 +38,12 @@ public class ClientConnectServerThread extends Thread{
                 //接收来自用户的私聊消息
                 if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES)){
                     System.out.println(message.getSendTime()+message.getSender()+"对我说："+message.getContent());
+                }else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES_ALL)){
+                    System.out.println(message.getSendTime()+message.getSender()+"对大家说："+message.getContent());
+                }
+                if(message.getMesType().equals(MessageType.MESSAGE_COMM_FILE_MES)){
+                    System.out.println("正在接收来自"+message.getSender()+"发送的文件,"+"大小为"+message.getFilelen()+"字节");
+                    FileService.savefile(message.getDest(),message.getFilebytes());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

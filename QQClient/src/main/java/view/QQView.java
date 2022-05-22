@@ -1,5 +1,6 @@
 package view;
 
+import service.FileService;
 import service.MessageClientService;
 import service.UserClientService;
 
@@ -49,6 +50,9 @@ public class QQView {
                                     userClientService.onlineFriendList();
                                     break;
                                 case "2":
+                                    System.out.println("请输入要群发的内容");
+                                    String c=scanner.next();
+                                    messageClientService.sendMessageToAll(c,userId);
                                     break;
                                 case "3":
                                     System.out.print("请输入要私聊的用户名称：");
@@ -58,6 +62,13 @@ public class QQView {
                                     messageClientService.sendMessageToOne(content,userId,getter);
                                     break;
                                 case "4":
+                                    System.out.print("请输入接收人用户名：");
+                                    String filegetter=scanner.next();
+                                    System.out.print("请输入要发送的文件的路径：");
+                                    String src=scanner.next();
+                                    System.out.print("请输入要发送的文件接收人的保存路径：");
+                                    String dest=scanner.next();
+                                    FileService.sendfile(userId,filegetter,src,dest);
                                     break;
                                 case "9":
                                     userClientService.logout();

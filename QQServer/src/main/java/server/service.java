@@ -3,7 +3,6 @@ package server;
 import common.Message;
 import common.MessageType;
 import common.User;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
