@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @author: zhangzhongxin
  * @Date: 2022/5/19 10:59
  */
-public class service {
+public class Service {
     private ServerSocket serverSocket=null;
 
     private static HashMap<String,User> validUsers=new HashMap<>();
@@ -38,10 +38,11 @@ public class service {
             return false;
         }
     }
-    public service(){
+    public Service(){
         try {
             System.out.println("服务端在9999监听....");
             serverSocket=new ServerSocket(9999);
+            new Thread(new SendNewsToAllServer()).start();
             while (true){//当和某个客户端建立连接后会继续监听
             Socket socket = serverSocket.accept();//如果没有客户端连接，就会阻塞
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -55,6 +56,8 @@ public class service {
                     ServerConnectClientThread serverConnectClientThread = new ServerConnectClientThread(user.getUserId(),socket);
                     serverConnectClientThread.start();//启动线程
                     ManageClientThreads.addClientThread(user.getUserId(), serverConnectClientThread);//将线程放入集合
+                    //发送离线消息和文件（如果有离线消息和文件）
+                    ManageClientThreads.sendOfflineMessagesAndFiles(user.getUserId());
                 }else{
                     message.setMesType(MessageType.MESSAGE_LOGIN_FAIL);//设置登录状态为失败
                     ObjectOutputStream objectOnputStream = new ObjectOutputStream(socket.getOutputStream());

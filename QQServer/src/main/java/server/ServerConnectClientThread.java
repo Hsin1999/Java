@@ -15,6 +15,14 @@ public class ServerConnectClientThread extends Thread {
     private Socket socket;
     private String userId;
 
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
     public ServerConnectClientThread(String userId, Socket socket) {
         this.socket = socket;
         this.userId = userId;
@@ -51,6 +59,8 @@ public class ServerConnectClientThread extends Thread {
                     if (clientThread != null) {
                         ObjectOutputStream outputStream = new ObjectOutputStream(clientThread.socket.getOutputStream());
                         outputStream.writeObject(message);
+                    }else{
+                        ManageClientThreads.addOfflineMessage(message.getGetter(),message);//将信息或文件离线发送
                     }
 
                 } else if (message.getMesType().equals(MessageType.MESSAGE_COMM_MES_ALL)) {//群发消息

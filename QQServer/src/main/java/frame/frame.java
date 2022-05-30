@@ -1,6 +1,6 @@
 package frame;
 
-import server.service;
+import server.Service;
 
 /**
  * @author: zhangzhongxin
@@ -8,6 +8,6 @@ import server.service;
  */
 public class frame {
     public static void main(String[] args) {
-        new service();
+        new Service();
     }
 }

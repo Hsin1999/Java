@@ -9,7 +9,7 @@ public class Startgame extends JFrame{
         TankPanel mp = new TankPanel();
         this.add(mp);
         this.setSize(1000,800);
-        //JFrame.addKeyListener可以监听aa到面板发生到键盘事件
+        //JFrame.addKeyListener可以监听到面板发生到键盘事件
         this.addKeyListener(mp);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

@@ -7,8 +7,6 @@ import java.util.Date;
 public class Billtest {
     @Test
     public void test(){
-        int i=10000;
-        System.out.println(new BigDecimal(i).setScale(2, RoundingMode.HALF_UP));
-        System.out.println(new Date());
+        System.out.println(BigDecimal.valueOf(100000L, 4).divide(BigDecimal.valueOf(4),RoundingMode.HALF_UP).setScale(2));
     }
 }
