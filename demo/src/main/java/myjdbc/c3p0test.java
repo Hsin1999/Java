@@ -39,10 +39,4 @@ public class c3p0test {
         long l1 = System.currentTimeMillis();
         System.out.println(l1-l);
     }
-    @Test
-    public void c3p0test_02() throws Exception {
-        ComboPooledDataSource comboPooledDataSource=new ComboPooledDataSource("jasonconnect");
-        Connection connection = comboPooledDataSource.getConnection();
-        connection.close();
-    }
 }
