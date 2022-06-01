@@ -50,6 +50,7 @@ public class UserClientService {
     public void onlineFriendList(){
         //发送一个Message
         Message message = new Message();
+        message.setSender(u.getUserId());
         message.setMesType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
         ObjectOutputStream outputStream = null;
         try {

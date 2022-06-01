@@ -1,12 +1,12 @@
-package jdbc.utils;
+package utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import myjdbc.druidtest;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.junit.Test;
+
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 /**
